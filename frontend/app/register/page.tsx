@@ -14,7 +14,7 @@ export default function Register() {
     email: '',
     password: '',
     confirmPassword: '',
-    role: 'UMKM' as 'UMKM' | 'INVESTOR',
+    role: 'UMKM' as 'UMKM' | 'KREDITOR',
   });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -47,7 +47,7 @@ export default function Register() {
       if (data.user.role === 'UMKM') {
         router.push('/umkm/dashboard');
       } else {
-        router.push('/investor/browse');
+        router.push('/kreditor/browse');
       }
     } catch (err) {
       const error = err as { response?: { data?: { message?: string } } };
@@ -94,14 +94,14 @@ export default function Register() {
               </button>
               <button
                 type="button"
-                onClick={() => setFormData({ ...formData, role: 'INVESTOR' })}
+                onClick={() => setFormData({ ...formData, role: 'KREDITOR' })}
                 className={`p-4 rounded-lg border-2 transition ${
-                  formData.role === 'INVESTOR'
+                  formData.role === 'KREDITOR'
                     ? 'border-blue-600 bg-blue-50 dark:bg-blue-900/20 dark:border-blue-500'
                     : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 bg-white dark:bg-gray-700'
                 }`}
               >
-                <div className="font-semibold text-gray-900 dark:text-white">Investor</div>
+                <div className="font-semibold text-gray-900 dark:text-white">Kreditor</div>
                 <div className="text-xs text-gray-600 dark:text-gray-400">Pemberi Pinjaman</div>
               </button>
             </div>

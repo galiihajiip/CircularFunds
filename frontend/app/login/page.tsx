@@ -29,11 +29,14 @@ export default function Login() {
       if (data.user.role === 'UMKM') {
         router.push('/umkm/dashboard');
       } else {
-        router.push('/investor/browse');
+        router.push('/kreditor/browse');
       }
     } catch (err) {
-      const error = err as { response?: { data?: { message?: string } } };
-      setError(error.response?.data?.message || 'Login gagal');
+      console.error('Login error:', err);
+      const error = err as { response?: { data?: { message?: string } }; message?: string };
+      const errorMessage = error.response?.data?.message || error.message || 'Login gagal';
+      console.error('Error message:', errorMessage);
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }

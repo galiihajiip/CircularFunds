@@ -8,6 +8,6 @@ export class RegisterDto {
   @MinLength(8)
   password: string;
 
-  @IsEnum(['UMKM', 'INVESTOR'])
-  role: 'UMKM' | 'INVESTOR';
+  @IsEnum(['UMKM', 'KREDITOR'])
+  role: 'UMKM' | 'KREDITOR';
 }

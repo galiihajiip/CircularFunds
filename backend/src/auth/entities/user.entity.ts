@@ -12,7 +12,7 @@ export class User {
   password_hash: string;
 
   @Column()
-  role: 'UMKM' | 'INVESTOR';
+  role: 'UMKM' | 'KREDITOR';
 
   @Column({ default: false })
   email_verified: boolean;
