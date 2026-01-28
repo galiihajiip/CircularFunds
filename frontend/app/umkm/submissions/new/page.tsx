@@ -32,7 +32,6 @@ export default function NewSubmission() {
     setLoading(true);
 
     try {
-      // Calculate score first
       const scoreData = {
         umkmId: user?.id,
         ...formData,
@@ -40,34 +39,33 @@ export default function NewSubmission() {
       
       const { data } = await api.post('/scoring/calculate', scoreData);
       
-      // Show results
-      alert(`Score calculated! Total: ${data.totalScore}/100 - ${data.recommendation}`);
+      alert(`Skor berhasil dihitung! Total: ${data.totalScore}/100 - ${data.recommendation}`);
       router.push('/umkm/dashboard');
     } catch (err: any) {
-      setError(err.response?.data?.message || 'Failed to submit');
+      setError(err.response?.data?.message || 'Gagal mengirim');
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
       <Link
         href="/umkm/dashboard"
-        className="inline-flex items-center text-green-600 hover:text-green-700 mb-6"
+        className="inline-flex items-center text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300 mb-6"
       >
         <ArrowLeft className="h-4 w-4 mr-2" />
-        Back to Dashboard
+        Kembali ke Dashboard
       </Link>
 
-      <div className="bg-white rounded-xl shadow-md p-8">
-        <h1 className="text-2xl font-bold text-gray-900 mb-2">New Circular Practice Submission</h1>
-        <p className="text-gray-600 mb-8">
-          Document your circular economy practices to receive a score
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 sm:p-8">
+        <h1 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-2">Pengajuan Praktik Sirkular Baru</h1>
+        <p className="text-gray-600 dark:text-gray-400 mb-8">
+          Dokumentasikan praktik ekonomi sirkular Anda untuk mendapatkan skor
         </p>
 
         {error && (
-          <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6">
+          <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-400 px-4 py-3 rounded-lg mb-6">
             {error}
           </div>
         )}
@@ -75,93 +73,91 @@ export default function NewSubmission() {
         <form onSubmit={handleSubmit} className="space-y-8">
           {/* Resource Reduction */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Resource Reduction</h3>
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Resource Reduction Percentage (%)
-                </label>
-                <input
-                  type="number"
-                  min="0"
-                  max="100"
-                  value={formData.resourceReductionPercentage}
-                  onChange={(e) => setFormData({ ...formData, resourceReductionPercentage: Number(e.target.value) })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
-                />
-              </div>
+            <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">Pengurangan Sumber Daya</h3>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Persentase Pengurangan Sumber Daya (%)
+              </label>
+              <input
+                type="number"
+                min="0"
+                max="100"
+                value={formData.resourceReductionPercentage}
+                onChange={(e) => setFormData({ ...formData, resourceReductionPercentage: Number(e.target.value) })}
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              />
             </div>
           </div>
 
           {/* Reuse Practice */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Reuse Practice</h3>
+            <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">Praktik Penggunaan Ulang</h3>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Reuse Frequency
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Frekuensi Penggunaan Ulang
               </label>
               <select
                 value={formData.reuseFrequency}
                 onChange={(e) => setFormData({ ...formData, reuseFrequency: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               >
-                <option value="never">Never</option>
-                <option value="rarely">Rarely</option>
-                <option value="sometimes">Sometimes</option>
-                <option value="weekly">Weekly</option>
-                <option value="daily">Daily</option>
+                <option value="never">Tidak Pernah</option>
+                <option value="rarely">Jarang</option>
+                <option value="sometimes">Kadang-kadang</option>
+                <option value="weekly">Mingguan</option>
+                <option value="daily">Harian</option>
               </select>
             </div>
           </div>
 
           {/* Recycle Integration */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Recycle Integration</h3>
+            <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">Integrasi Daur Ulang</h3>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Recycling Type
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Jenis Daur Ulang
               </label>
               <select
                 value={formData.recycleType}
                 onChange={(e) => setFormData({ ...formData, recycleType: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               >
-                <option value="none">None</option>
-                <option value="basic">Basic</option>
-                <option value="moderate">Moderate</option>
-                <option value="comprehensive">Comprehensive</option>
+                <option value="none">Tidak Ada</option>
+                <option value="basic">Dasar</option>
+                <option value="moderate">Sedang</option>
+                <option value="comprehensive">Komprehensif</option>
               </select>
             </div>
           </div>
 
           {/* Product Durability */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Product Durability</h3>
+            <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">Daya Tahan Produk</h3>
             <div className="grid md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Product Lifespan (years)
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Umur Produk (tahun)
                 </label>
                 <input
                   type="number"
                   min="1"
                   value={formData.productLifespanYears}
                   onChange={(e) => setFormData({ ...formData, productLifespanYears: Number(e.target.value) })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Product Repairability
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Dapat Diperbaiki
                 </label>
                 <div className="flex items-center h-full">
                   <input
                     type="checkbox"
                     checked={formData.productRepairability}
                     onChange={(e) => setFormData({ ...formData, productRepairability: e.target.checked })}
-                    className="h-5 w-5 text-green-600 focus:ring-green-500 border-gray-300 rounded"
+                    className="h-5 w-5 text-green-600 focus:ring-green-500 border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700"
                   />
-                  <span className="ml-2 text-gray-700">Products are repairable</span>
+                  <span className="ml-2 text-gray-700 dark:text-gray-300">Produk dapat diperbaiki</span>
                 </div>
               </div>
             </div>
@@ -169,10 +165,10 @@ export default function NewSubmission() {
 
           {/* Process Efficiency */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Process Efficiency</h3>
+            <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">Efisiensi Proses</h3>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Efficiency Improvement (%)
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Peningkatan Efisiensi (%)
               </label>
               <input
                 type="number"
@@ -180,42 +176,42 @@ export default function NewSubmission() {
                 max="100"
                 value={formData.processEfficiencyImprovement}
                 onChange={(e) => setFormData({ ...formData, processEfficiencyImprovement: Number(e.target.value) })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               />
             </div>
           </div>
 
           {/* Transparency */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Transparency</h3>
+            <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">Transparansi</h3>
             <div className="grid md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Documentation Level
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Level Dokumentasi
                 </label>
                 <select
                   value={formData.documentationLevel}
                   onChange={(e) => setFormData({ ...formData, documentationLevel: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 >
-                  <option value="none">None</option>
-                  <option value="basic">Basic</option>
-                  <option value="detailed">Detailed</option>
-                  <option value="comprehensive">Comprehensive</option>
+                  <option value="none">Tidak Ada</option>
+                  <option value="basic">Dasar</option>
+                  <option value="detailed">Detail</option>
+                  <option value="comprehensive">Komprehensif</option>
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Traceability System
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Sistem Pelacakan
                 </label>
                 <div className="flex items-center h-full">
                   <input
                     type="checkbox"
                     checked={formData.traceabilitySystem}
                     onChange={(e) => setFormData({ ...formData, traceabilitySystem: e.target.checked })}
-                    className="h-5 w-5 text-green-600 focus:ring-green-500 border-gray-300 rounded"
+                    className="h-5 w-5 text-green-600 focus:ring-green-500 border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700"
                   />
-                  <span className="ml-2 text-gray-700">Has traceability system</span>
+                  <span className="ml-2 text-gray-700 dark:text-gray-300">Memiliki sistem pelacakan</span>
                 </div>
               </div>
             </div>
@@ -223,55 +219,55 @@ export default function NewSubmission() {
 
           {/* Carbon Avoidance */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Carbon Avoidance</h3>
+            <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">Pengurangan Karbon</h3>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Carbon Reduction (kg CO2)
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Pengurangan Karbon (kg CO2)
               </label>
               <input
                 type="number"
                 min="0"
                 value={formData.carbonReductionKg}
                 onChange={(e) => setFormData({ ...formData, carbonReductionKg: Number(e.target.value) })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               />
             </div>
           </div>
 
           {/* Livelihood Impact */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Livelihood Impact</h3>
+            <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">Dampak Penghidupan</h3>
             <div className="grid md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Local Employees
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Karyawan Lokal
                 </label>
                 <input
                   type="number"
                   min="0"
                   value={formData.localEmployees}
                   onChange={(e) => setFormData({ ...formData, localEmployees: Number(e.target.value) })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Income Stability
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Stabilitas Pendapatan
                 </label>
                 <select
                   value={formData.incomeStability}
                   onChange={(e) => setFormData({ ...formData, incomeStability: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 >
-                  <option value="unstable">Unstable</option>
-                  <option value="moderate">Moderate</option>
-                  <option value="stable">Stable</option>
+                  <option value="unstable">Tidak Stabil</option>
+                  <option value="moderate">Sedang</option>
+                  <option value="stable">Stabil</option>
                 </select>
               </div>
             </div>
           </div>
 
-          <div className="flex space-x-4 pt-6 border-t">
+          <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4 pt-6 border-t dark:border-gray-700">
             <button
               type="submit"
               disabled={loading}
@@ -280,20 +276,20 @@ export default function NewSubmission() {
               {loading ? (
                 <>
                   <Loader className="h-5 w-5 animate-spin" />
-                  <span>Calculating...</span>
+                  <span>Menghitung...</span>
                 </>
               ) : (
                 <>
                   <Save className="h-5 w-5" />
-                  <span>Calculate Score</span>
+                  <span>Hitung Skor</span>
                 </>
               )}
             </button>
             <Link
               href="/umkm/dashboard"
-              className="px-6 py-3 border border-gray-300 rounded-lg font-semibold hover:bg-gray-50 transition"
+              className="px-6 py-3 border border-gray-300 dark:border-gray-600 rounded-lg font-semibold hover:bg-gray-50 dark:hover:bg-gray-700 transition text-center text-gray-900 dark:text-white"
             >
-              Cancel
+              Batal
             </Link>
           </div>
         </form>

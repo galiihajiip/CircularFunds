@@ -44,7 +44,7 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="CircularFund" />
       </head>
-      <body className={inter.className}>
+      <body className={`${inter.className} bg-gray-50 dark:bg-gray-900`}>
         <ThemeProvider>
           <AuthProvider>
             <Navbar />

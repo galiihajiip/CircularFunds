@@ -20,11 +20,11 @@ export default function TestPage() {
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-16">
-      <h1 className="text-3xl font-bold mb-8">Button Test Page</h1>
+      <h1 className="text-3xl font-bold mb-8 text-gray-900 dark:text-white">Button Test Page</h1>
       
       <div className="space-y-4">
-        <div className="bg-white p-6 rounded-lg shadow">
-          <h2 className="text-xl font-semibold mb-4">Test 1: Basic Button</h2>
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+          <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Test 1: Basic Button</h2>
           <button
             onClick={handleClick}
             className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700"
@@ -33,8 +33,8 @@ export default function TestPage() {
           </button>
         </div>
 
-        <div className="bg-white p-6 rounded-lg shadow">
-          <h2 className="text-xl font-semibold mb-4">Test 2: Navigation Button</h2>
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+          <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Test 2: Navigation Button</h2>
           <button
             onClick={handleNavigate}
             className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700"
@@ -43,8 +43,8 @@ export default function TestPage() {
           </button>
         </div>
 
-        <div className="bg-white p-6 rounded-lg shadow">
-          <h2 className="text-xl font-semibold mb-4">Test 3: Link Component</h2>
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+          <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Test 3: Link Component</h2>
           <Link
             href="/"
             className="inline-block bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700"
@@ -53,13 +53,13 @@ export default function TestPage() {
           </Link>
         </div>
 
-        <div className="bg-white p-6 rounded-lg shadow">
-          <h2 className="text-xl font-semibold mb-4">Test 4: Form Submit</h2>
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+          <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Test 4: Form Submit</h2>
           <form onSubmit={(e) => { e.preventDefault(); alert('Form submitted!'); }}>
             <input
               type="text"
               placeholder="Type something..."
-              className="border px-4 py-2 rounded mr-2"
+              className="border border-gray-300 dark:border-gray-600 px-4 py-2 rounded mr-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
             />
             <button
               type="submit"
@@ -72,7 +72,7 @@ export default function TestPage() {
       </div>
 
       <div className="mt-8">
-        <p className="text-gray-600">
+        <p className="text-gray-600 dark:text-gray-400">
           Open browser console (F12) to see click logs
         </p>
       </div>

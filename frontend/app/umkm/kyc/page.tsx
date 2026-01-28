@@ -54,15 +54,15 @@ export default function UmkmKyc() {
   if (success) {
     return (
       <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
-        <div className="bg-white rounded-xl shadow-md p-12">
-          <div className="bg-green-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
-            <Shield className="h-10 w-10 text-green-600" />
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-12">
+          <div className="bg-green-100 dark:bg-green-900/30 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+            <Shield className="h-10 w-10 text-green-600 dark:text-green-400" />
           </div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">KYC Submitted Successfully!</h2>
-          <p className="text-gray-600 mb-6">
-            Your KYC application is being reviewed. You'll be notified once it's approved.
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">KYC Berhasil Dikirim!</h2>
+          <p className="text-gray-600 dark:text-gray-400 mb-6">
+            Aplikasi KYC Anda sedang ditinjau. Anda akan diberitahu setelah disetujui.
           </p>
-          <p className="text-sm text-gray-500">Redirecting to dashboard...</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400">Mengalihkan ke dashboard...</p>
         </div>
       </div>
     );
@@ -72,23 +72,23 @@ export default function UmkmKyc() {
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <Link
         href="/umkm/dashboard"
-        className="inline-flex items-center text-green-600 hover:text-green-700 mb-6"
+        className="inline-flex items-center text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300 mb-6"
       >
         <ArrowLeft className="h-4 w-4 mr-2" />
-        Back to Dashboard
+        Kembali ke Dashboard
       </Link>
 
-      <div className="bg-white rounded-xl shadow-md p-8">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-8">
         <div className="flex items-center space-x-3 mb-6">
-          <Shield className="h-8 w-8 text-green-600" />
+          <Shield className="h-8 w-8 text-green-600 dark:text-green-400" />
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Business Owner KYC</h1>
-            <p className="text-gray-600">Complete your verification to access funding</p>
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">KYC Pemilik Bisnis</h1>
+            <p className="text-gray-600 dark:text-gray-400">Lengkapi verifikasi untuk akses pendanaan</p>
           </div>
         </div>
 
         {error && (
-          <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6">
+          <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-400 px-4 py-3 rounded-lg mb-6">
             {error}
           </div>
         )}
@@ -96,55 +96,55 @@ export default function UmkmKyc() {
         <form onSubmit={handleSubmit} className="space-y-8">
           {/* Personal Information */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Personal Information</h3>
+            <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">Informasi Pribadi</h3>
             <div className="grid md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Full Name *
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Nama Lengkap *
                 </label>
                 <input
                   type="text"
                   required
                   value={formData.fullName}
                   onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  ID Number (KTP) *
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Nomor KTP *
                 </label>
                 <input
                   type="text"
                   required
                   value={formData.idNumber}
                   onChange={(e) => setFormData({ ...formData, idNumber: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Phone Number *
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Nomor Telepon *
                 </label>
                 <input
                   type="tel"
                   required
                   value={formData.phoneNumber}
                   onChange={(e) => setFormData({ ...formData, phoneNumber: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                   placeholder="+628123456789"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Address *
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Alamat *
                 </label>
                 <input
                   type="text"
                   required
                   value={formData.address}
                   onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 />
               </div>
             </div>
@@ -152,72 +152,72 @@ export default function UmkmKyc() {
 
           {/* Business Information */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Business Information</h3>
+            <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">Informasi Bisnis</h3>
             <div className="grid md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Business Name *
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Nama Bisnis *
                 </label>
                 <input
                   type="text"
                   required
                   value={formData.businessName}
                   onChange={(e) => setFormData({ ...formData, businessName: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Business Type *
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Jenis Bisnis *
                 </label>
                 <select
                   required
                   value={formData.businessType}
                   onChange={(e) => setFormData({ ...formData, businessType: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 >
-                  <option value="">Select type</option>
-                  <option value="Manufacturing">Manufacturing</option>
+                  <option value="">Pilih jenis</option>
+                  <option value="Manufaktur">Manufaktur</option>
                   <option value="Retail">Retail</option>
-                  <option value="Services">Services</option>
-                  <option value="Agriculture">Agriculture</option>
-                  <option value="Other">Other</option>
+                  <option value="Jasa">Jasa</option>
+                  <option value="Pertanian">Pertanian</option>
+                  <option value="Lainnya">Lainnya</option>
                 </select>
               </div>
               <div className="md:col-span-2">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Business Address *
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Alamat Bisnis *
                 </label>
                 <input
                   type="text"
                   required
                   value={formData.businessAddress}
                   onChange={(e) => setFormData({ ...formData, businessAddress: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Annual Revenue (IDR) *
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Pendapatan Tahunan (IDR) *
                 </label>
                 <input
                   type="number"
                   required
                   value={formData.annualRevenue}
                   onChange={(e) => setFormData({ ...formData, annualRevenue: Number(e.target.value) })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Employee Count *
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Jumlah Karyawan *
                 </label>
                 <input
                   type="number"
                   required
                   value={formData.employeeCount}
                   onChange={(e) => setFormData({ ...formData, employeeCount: Number(e.target.value) })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 />
               </div>
             </div>
@@ -225,48 +225,48 @@ export default function UmkmKyc() {
 
           {/* Bank Information */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Bank Information</h3>
+            <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">Informasi Bank</h3>
             <div className="grid md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Bank Name *
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Nama Bank *
                 </label>
                 <input
                   type="text"
                   required
                   value={formData.bankName}
                   onChange={(e) => setFormData({ ...formData, bankName: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Account Number *
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Nomor Rekening *
                 </label>
                 <input
                   type="text"
                   required
                   value={formData.bankAccountNumber}
                   onChange={(e) => setFormData({ ...formData, bankAccountNumber: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 />
               </div>
               <div className="md:col-span-2">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Account Holder Name *
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Nama Pemegang Rekening *
                 </label>
                 <input
                   type="text"
                   required
                   value={formData.bankAccountName}
                   onChange={(e) => setFormData({ ...formData, bankAccountName: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 />
               </div>
             </div>
           </div>
 
-          <div className="flex space-x-4 pt-6 border-t">
+          <div className="flex space-x-4 pt-6 border-t dark:border-gray-700">
             <button
               type="submit"
               disabled={loading}
@@ -275,20 +275,20 @@ export default function UmkmKyc() {
               {loading ? (
                 <>
                   <Loader className="h-5 w-5 animate-spin" />
-                  <span>Submitting...</span>
+                  <span>Mengirim...</span>
                 </>
               ) : (
                 <>
                   <Save className="h-5 w-5" />
-                  <span>Submit KYC</span>
+                  <span>Kirim KYC</span>
                 </>
               )}
             </button>
             <Link
               href="/umkm/dashboard"
-              className="px-6 py-3 border border-gray-300 rounded-lg font-semibold hover:bg-gray-50 transition"
+              className="px-6 py-3 border border-gray-300 dark:border-gray-600 rounded-lg font-semibold hover:bg-gray-50 dark:hover:bg-gray-700 transition text-gray-900 dark:text-white"
             >
-              Cancel
+              Batal
             </Link>
           </div>
         </form>
