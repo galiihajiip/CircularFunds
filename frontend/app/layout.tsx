@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "CircularFund - Platform Pendanaan Ekonomi Sirkular",
-  description: "Menghubungkan UMKM berkelanjutan dengan investor berdampak",
+  description: "Menghubungkan UMKM berkelanjutan dengan kreditor berdampak",
   manifest: '/manifest.json',
   themeColor: '#16a34a',
   appleWebApp: {

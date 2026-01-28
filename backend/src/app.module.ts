@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { UmkmModule } from './umkm/umkm.module';
-import { InvestorModule } from './investor/investor.module';
+import { KreditorModule } from './kreditor/kreditor.module';
 import { ScoringModule } from './scoring/scoring.module';
 import { SubmissionModule } from './submission/submission.module';
 import { FileModule } from './file/file.module';
@@ -24,7 +24,7 @@ import { KycModule } from './kyc/kyc.module';
     }),
     AuthModule,
     UmkmModule,
-    InvestorModule,
+    KreditorModule,
     ScoringModule,
     SubmissionModule,
     FileModule,

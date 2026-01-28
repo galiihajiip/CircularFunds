@@ -26,7 +26,7 @@ export default function Home() {
                 Danai <span className="text-green-600 dark:text-green-400">Ekonomi Sirkular</span> Indonesia
               </h1>
               <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto lg:mx-0">
-                Menghubungkan UMKM berkelanjutan dengan investor berdampak. Dukung praktik ekonomi sirkular 
+                Menghubungkan UMKM berkelanjutan dengan kreditor berdampak. Dukung praktik ekonomi sirkular 
                 dan dapatkan keuntungan sambil memberikan dampak positif bagi lingkungan.
               </p>
               <div className="flex flex-col sm:flex-row justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-4">
@@ -112,7 +112,7 @@ export default function Home() {
               Mengapa CircularFund?
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              Platform terpercaya untuk menghubungkan bisnis berkelanjutan dengan investor berdampak
+              Platform terpercaya untuk menghubungkan bisnis berkelanjutan dengan kreditor berdampak
             </p>
           </div>
 
@@ -179,7 +179,7 @@ export default function Home() {
                   { num: 1, title: 'Daftar & Lengkapi KYC', desc: 'Verifikasi identitas bisnis dan dapatkan akun RDN' },
                   { num: 2, title: 'Ajukan Praktik Sirkular', desc: 'Dokumentasikan inisiatif keberlanjutan dengan bukti' },
                   { num: 3, title: 'Dapatkan Skor AI', desc: 'Terima skor kesiapan sirkular (0-100)' },
-                  { num: 4, title: 'Terima Pendanaan', desc: 'Terhubung dengan investor dan berkembang berkelanjutan' },
+                  { num: 4, title: 'Terima Pendanaan', desc: 'Terhubung dengan kreditor dan berkembang berkelanjutan' },
                 ].map((step) => (
                   <li key={step.num} className="flex items-start group">
                     <span className="flex-shrink-0 bg-green-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-semibold mr-4 group-hover:scale-110 transition-transform">
@@ -194,13 +194,13 @@ export default function Home() {
               </ol>
             </div>
 
-            {/* For Investors */}
+            {/* For Kreditor */}
             <div className="bg-white dark:bg-gray-900 p-6 sm:p-8 rounded-2xl shadow-xl">
               <div className="flex items-center space-x-3 mb-6">
                 <div className="bg-blue-100 dark:bg-blue-900/30 p-3 rounded-xl">
                   <TrendingUp className="h-6 w-6 text-blue-600 dark:text-blue-400" />
                 </div>
-                <h3 className="text-2xl font-semibold text-blue-600 dark:text-blue-400">Untuk Investor</h3>
+                <h3 className="text-2xl font-semibold text-blue-600 dark:text-blue-400">Untuk Kreditor</h3>
               </div>
               <ol className="space-y-4">
                 {[

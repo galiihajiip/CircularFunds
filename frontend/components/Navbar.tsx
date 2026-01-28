@@ -48,7 +48,7 @@ export default function Navbar() {
             {user ? (
               <>
                 <Link
-                  href={user.role === 'UMKM' ? '/umkm/dashboard' : '/investor/browse'}
+                  href={user.role === 'UMKM' ? '/umkm/dashboard' : '/kreditor/browse'}
                   className="text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 px-3 py-2 rounded-md text-sm font-medium"
                 >
                   Dashboard
@@ -138,7 +138,7 @@ export default function Navbar() {
                   </span>
                 </div>
                 <Link
-                  href={user.role === 'UMKM' ? '/umkm/dashboard' : '/investor/browse'}
+                  href={user.role === 'UMKM' ? '/umkm/dashboard' : '/kreditor/browse'}
                   onClick={() => setMobileMenuOpen(false)}
                   className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
                 >

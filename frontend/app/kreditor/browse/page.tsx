@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import api from '@/lib/api';
 import { Search, Filter, MapPin, Users, TrendingUp, Award } from 'lucide-react';
 
-export default function InvestorBrowse() {
+export default function KreditorBrowse() {
   const { user } = useAuthStore();
   const router = useRouter();
   const [umkms, setUmkms] = useState<any[]>([]);
@@ -18,7 +18,7 @@ export default function InvestorBrowse() {
   });
 
   useEffect(() => {
-    if (!user || user.role !== 'INVESTOR') {
+    if (!user || user.role !== 'KREDITOR') {
       router.push('/login');
       return;
     }
@@ -28,7 +28,7 @@ export default function InvestorBrowse() {
 
   const fetchUmkms = async () => {
     try {
-      const { data } = await api.get('/investor/umkm', { params: filters });
+      const { data } = await api.get('/kreditor/umkm', { params: filters });
       // Ensure we always set an array
       const umkmList = data?.data || data || [];
       setUmkms(Array.isArray(umkmList) ? umkmList : []);
@@ -64,7 +64,7 @@ export default function InvestorBrowse() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
       <div className="mb-6 sm:mb-8">
         <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">Jelajahi Bisnis</h1>
-        <p className="text-gray-600 dark:text-gray-400 mt-2">Temukan bisnis berkelanjutan untuk diinvestasikan</p>
+        <p className="text-gray-600 dark:text-gray-400 mt-2">Temukan bisnis berkelanjutan untuk didanai</p>
       </div>
 
       {/* Filters */}
@@ -141,7 +141,7 @@ export default function InvestorBrowse() {
             <div
               key={umkm.id}
               className="bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-lg transition overflow-hidden cursor-pointer"
-              onClick={() => router.push(`/investor/umkm/${umkm.id}`)}
+              onClick={() => router.push(`/kreditor/umkm/${umkm.id}`)}
             >
               <div className="p-4 sm:p-6">
                 <div className="flex items-start justify-between mb-4">

@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: 'CircularFund - Platform Pendanaan Ekonomi Sirkular',
     short_name: 'CircularFund',
-    description: 'Menghubungkan UMKM berkelanjutan dengan investor berdampak',
+    description: 'Menghubungkan UMKM berkelanjutan dengan kreditor berdampak',
     start_url: '/',
     display: 'standalone',
     background_color: '#ffffff',
