@@ -1,5 +1,5 @@
 import { Controller, Get, Post, Delete, Param, Query, Body } from '@nestjs/common';
-import { KreditorService } from './investor.service';
+import { KreditorService } from './kreditor.service';
 import { UmkmFilterDto } from './dto/umkm-filter.dto';
 
 @Controller('investor')
@@ -55,4 +55,5 @@ export class KreditorController {
     return this.KreditorService.getBookmarks(kreditorId);
   }
 }
+
 

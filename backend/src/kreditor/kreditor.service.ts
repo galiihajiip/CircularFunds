@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { KreditorProfile } from './entities/investor-profile.entity';
+import { KreditorProfile } from './entities/kreditor-profile.entity';
 import { UmkmFilterDto } from './dto/umkm-filter.dto';
 
 @Injectable()
@@ -109,4 +109,5 @@ export class KreditorService {
     );
   }
 }
+
 

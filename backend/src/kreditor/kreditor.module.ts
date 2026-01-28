@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { KreditorController } from './investor.controller';
-import { KreditorService } from './investor.service';
-import { KreditorProfile } from './entities/investor-profile.entity';
+import { KreditorController } from './kreditor.controller';
+import { KreditorService } from './kreditor.service';
+import { KreditorProfile } from './entities/kreditor-profile.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([KreditorProfile])],
@@ -11,4 +11,5 @@ import { KreditorProfile } from './entities/investor-profile.entity';
   exports: [KreditorService],
 })
 export class KreditorModule {}
+
 
