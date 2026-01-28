@@ -10,7 +10,14 @@ import Link from 'next/link';
 export default function UmkmDashboard() {
   const { user } = useAuthStore();
   const router = useRouter();
-  const [profile, setProfile] = useState<any>(null);
+  const [profile, setProfile] = useState<{
+    circularScore?: number;
+    isVerified?: boolean;
+    businessName?: string;
+    businessType?: string;
+    location?: string;
+    employeeCount?: number;
+  } | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -19,6 +26,7 @@ export default function UmkmDashboard() {
       return;
     }
     fetchProfile();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, router]);
 
   const fetchProfile = async () => {
@@ -59,7 +67,7 @@ export default function UmkmDashboard() {
             <span className="text-base sm:text-lg text-gray-500 dark:text-gray-400">/100</span>
           </div>
           <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-            {profile?.circularScore >= 70 ? 'Sangat Baik' : profile?.circularScore >= 50 ? 'Baik' : 'Berkembang'}
+            {(profile?.circularScore ?? 0) >= 70 ? 'Sangat Baik' : (profile?.circularScore ?? 0) >= 50 ? 'Baik' : 'Berkembang'}
           </div>
         </div>
 

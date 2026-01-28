@@ -35,8 +35,9 @@ export default function SetupProfile() {
 
       await api.post('/umkm/profile', profileData);
       router.push('/umkm/dashboard');
-    } catch (err: any) {
-      setError(err.response?.data?.message || 'Gagal membuat profil');
+    } catch (err) {
+      const error = err as { response?: { data?: { message?: string } } };
+      setError(error.response?.data?.message || 'Gagal membuat profil');
     } finally {
       setLoading(false);
     }

@@ -49,8 +49,9 @@ export default function Register() {
       } else {
         router.push('/investor/browse');
       }
-    } catch (err: any) {
-      setError(err.response?.data?.message || 'Pendaftaran gagal');
+    } catch (err) {
+      const error = err as { response?: { data?: { message?: string } } };
+      setError(error.response?.data?.message || 'Pendaftaran gagal');
     } finally {
       setLoading(false);
     }

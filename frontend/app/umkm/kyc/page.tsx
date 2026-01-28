@@ -44,8 +44,9 @@ export default function UmkmKyc() {
       setTimeout(() => {
         router.push('/umkm/dashboard');
       }, 2000);
-    } catch (err: any) {
-      setError(err.response?.data?.message || 'Failed to submit KYC');
+    } catch (err) {
+      const error = err as { response?: { data?: { message?: string } } };
+      setError(error.response?.data?.message || 'Gagal mengirim KYC');
     } finally {
       setLoading(false);
     }

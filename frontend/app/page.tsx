@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Leaf, TrendingUp, Shield, Users, ArrowRight, Recycle, Award, BarChart3, CheckCircle2, Sparkles } from 'lucide-react';
+import { Leaf, TrendingUp, Shield, Users, ArrowRight, Recycle, Award, BarChart3, Sparkles } from 'lucide-react';
 
 export default function Home() {
   return (

@@ -31,8 +31,9 @@ export default function Login() {
       } else {
         router.push('/investor/browse');
       }
-    } catch (err: any) {
-      setError(err.response?.data?.message || 'Login gagal');
+    } catch (err) {
+      const error = err as { response?: { data?: { message?: string } } };
+      setError(error.response?.data?.message || 'Login gagal');
     } finally {
       setLoading(false);
     }

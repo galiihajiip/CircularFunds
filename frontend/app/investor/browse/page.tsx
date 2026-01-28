@@ -23,6 +23,7 @@ export default function InvestorBrowse() {
       return;
     }
     fetchUmkms();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, router]);
 
   const fetchUmkms = async () => {
@@ -31,8 +32,8 @@ export default function InvestorBrowse() {
       // Ensure we always set an array
       const umkmList = data?.data || data || [];
       setUmkms(Array.isArray(umkmList) ? umkmList : []);
-    } catch (error) {
-      console.error('Failed to fetch UMKMs:', error);
+    } catch (err) {
+      console.error('Failed to fetch UMKMs:', err);
       setUmkms([]);
     } finally {
       setLoading(false);

@@ -41,8 +41,9 @@ export default function NewSubmission() {
       
       alert(`Skor berhasil dihitung! Total: ${data.totalScore}/100 - ${data.recommendation}`);
       router.push('/umkm/dashboard');
-    } catch (err: any) {
-      setError(err.response?.data?.message || 'Gagal mengirim');
+    } catch (err) {
+      const error = err as { response?: { data?: { message?: string } } };
+      setError(error.response?.data?.message || 'Gagal mengirim');
     } finally {
       setLoading(false);
     }
