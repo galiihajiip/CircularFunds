@@ -2,7 +2,7 @@ import { Controller, Get, Post, Delete, Param, Query, Body } from '@nestjs/commo
 import { KreditorService } from './kreditor.service';
 import { UmkmFilterDto } from './dto/umkm-filter.dto';
 
-@Controller('investor')
+@Controller('kreditor')
 export class KreditorController {
   constructor(private readonly KreditorService: KreditorService) {}
 

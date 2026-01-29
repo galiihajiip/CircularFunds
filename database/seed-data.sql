@@ -4,7 +4,7 @@
 INSERT INTO users (id, email, password_hash, role) VALUES
 ('a1b2c3d4-e5f6-4a5b-8c9d-0e1f2a3b4c5d', 'umkm1@example.com', '$2b$10$rKZLvXz8Q7X8Q7X8Q7X8Q7X8Q7X8Q7X8Q7X8Q7X8Q7X8Q7X8Q7X8', 'UMKM'),
 ('b2c3d4e5-f6a7-4b5c-9d0e-1f2a3b4c5d6e', 'umkm2@example.com', '$2b$10$rKZLvXz8Q7X8Q7X8Q7X8Q7X8Q7X8Q7X8Q7X8Q7X8Q7X8Q7X8Q7X8', 'UMKM'),
-('c3d4e5f6-a7b8-4c5d-0e1f-2a3b4c5d6e7f', 'investor1@example.com', '$2b$10$rKZLvXz8Q7X8Q7X8Q7X8Q7X8Q7X8Q7X8Q7X8Q7X8Q7X8Q7X8Q7X8', 'INVESTOR');
+('c3d4e5f6-a7b8-4c5d-0e1f-2a3b4c5d6e7f', 'kreditor1@example.com', '$2b$10$rKZLvXz8Q7X8Q7X8Q7X8Q7X8Q7X8Q7X8Q7X8Q7X8Q7X8Q7X8Q7X8', 'KREDITOR');
 
 -- Insert UMKM profiles
 INSERT INTO umkm_profiles (id, user_id, business_name, sector, description, location, established_year, employee_count, phone) VALUES
@@ -28,11 +28,11 @@ INSERT INTO umkm_profiles (id, user_id, business_name, sector, description, loca
  5,
  '+62823456789');
 
--- Insert investor profile
-INSERT INTO investor_profiles (id, user_id, name, organization, investment_focus) VALUES
+-- Insert kreditor profile
+INSERT INTO kreditor_profiles (id, user_id, name, organization, investment_focus) VALUES
 ('f6a7b8c9-d0e1-4f5a-3b4c-5d6e7f8a9b0c',
  'c3d4e5f6-a7b8-4c5d-0e1f-2a3b4c5d6e7f',
- 'Sarah Investor',
+ 'Sarah Kreditor',
  'Green Capital Partners',
  'Sustainable MSMEs, circular economy, social impact');
 

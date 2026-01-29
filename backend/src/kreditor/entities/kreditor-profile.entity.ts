@@ -24,7 +24,7 @@ export class KreditorProfile {
     nullable: true,
     enum: ['INDIVIDUAL', 'VC', 'CORPORATE', 'NGO']
   })
-  investor_type: string;
+  kreditor_type: string;
 
   @Column({ type: 'jsonb', nullable: true })
   focus_sectors: string[];

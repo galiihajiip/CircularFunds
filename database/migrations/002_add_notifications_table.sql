@@ -1,5 +1,5 @@
 -- Migration: Add notifications table
--- Purpose: Email/in-app notifications untuk UMKM dan Investor
+-- Purpose: Email/in-app notifications untuk UMKM dan Kreditor
 -- Created: January 25, 2026
 
 -- Create notifications table
@@ -13,7 +13,7 @@ CREATE TABLE notifications (
     -- Notification category
     category VARCHAR(50) NOT NULL CHECK (category IN (
         'submission_scored',
-        'investor_viewed',
+        'kreditor_viewed',
         'bookmark_added',
         'message_received',
         'profile_updated',
@@ -64,10 +64,10 @@ INSERT INTO notifications (user_id, type, category, title, message, data) VALUES
 (
     (SELECT id FROM users WHERE role = 'UMKM' LIMIT 1),
     'in_app',
-    'investor_viewed',
-    'Profil Anda Dilihat Investor',
-    'Seorang investor baru saja melihat profil bisnis Anda.',
-    '{"investor_name": "PT Investasi Hijau", "viewed_at": "2026-01-25T10:30:00Z"}'::jsonb
+    'kreditor_viewed',
+    'Profil Anda Dilihat Kreditor',
+    'Seorang kreditor baru saja melihat profil bisnis Anda.',
+    '{"kreditor_name": "PT Investasi Hijau", "viewed_at": "2026-01-25T10:30:00Z"}'::jsonb
 ),
 (
     (SELECT id FROM users WHERE role = 'UMKM' LIMIT 1),
@@ -77,9 +77,9 @@ INSERT INTO notifications (user_id, type, category, title, message, data) VALUES
     'Skor circular readiness Anda meningkat dari 65 menjadi 72. Terus tingkatkan praktik sirkular Anda!',
     '{"previous_score": 65, "new_score": 72, "improvement": 7}'::jsonb
 ),
--- Sample for Investor user
+-- Sample for Kreditor user
 (
-    (SELECT id FROM users WHERE role = 'INVESTOR' LIMIT 1),
+    (SELECT id FROM users WHERE role = 'KREDITOR' LIMIT 1),
     'in_app',
     'new_recommendation',
     'UMKM Baru Sesuai Preferensi Anda',
@@ -87,7 +87,7 @@ INSERT INTO notifications (user_id, type, category, title, message, data) VALUES
     '{"count": 3, "sector": "Fashion", "min_score": 75}'::jsonb
 ),
 (
-    (SELECT id FROM users WHERE role = 'INVESTOR' LIMIT 1),
+    (SELECT id FROM users WHERE role = 'KREDITOR' LIMIT 1),
     'in_app',
     'bookmark_added',
     'UMKM Ditambahkan ke Bookmark',
