@@ -1,0 +1,6 @@
+backend
+ai-service
+database
+docs
+*.md
+!frontend/**
