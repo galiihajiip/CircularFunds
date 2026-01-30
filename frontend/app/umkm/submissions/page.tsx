@@ -12,7 +12,12 @@ export default function Submissions() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!user || user.role !== 'UMKM') {
+    // Allow demo mode users
+    if (!user) {
+      router.push('/login');
+      return;
+    }
+    if (user.role !== 'UMKM') {
       router.push('/login');
       return;
     }
