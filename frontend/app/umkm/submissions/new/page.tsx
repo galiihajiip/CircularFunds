@@ -12,6 +12,7 @@ export default function NewSubmission() {
   const { user } = useAuthStore();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [scoreResult, setScoreResult] = useState<{ score: number; recommendation: string } | null>(null);
   const [formData, setFormData] = useState({
     resourceReductionPercentage: 0,
     reuseFrequency: 'never',
@@ -39,8 +40,8 @@ export default function NewSubmission() {
       
       const { data } = await api.post('/scoring/calculate', scoreData);
       
-      alert(`Skor berhasil dihitung! Total: ${data.totalScore}/100 - ${data.recommendation}`);
-      router.push('/umkm/dashboard');
+      setScoreResult({ score: data.totalScore, recommendation: data.recommendation });
+      setLoading(false);
     } catch (err) {
       console.error('Submission error:', err);
       const error = err as { response?: { data?: { message?: string } }; message?: string };
@@ -52,8 +53,8 @@ export default function NewSubmission() {
         const demoScore = Math.floor(Math.random() * 30) + 60; // Random score 60-90
         const demoRecommendation = demoScore >= 80 ? 'Sangat Baik' : demoScore >= 70 ? 'Baik' : 'Cukup Baik';
         
-        alert(`Mode Demo: Skor berhasil dihitung!\nTotal: ${demoScore}/100 - ${demoRecommendation}`);
-        router.push('/umkm/dashboard');
+        setScoreResult({ score: demoScore, recommendation: demoRecommendation });
+        setLoading(false);
         return;
       }
       
@@ -61,6 +62,13 @@ export default function NewSubmission() {
     } finally {
       setLoading(false);
     }
+  };
+
+  // Get score color and styling
+  const getScoreColor = (score: number) => {
+    if (score >= 80) return { bg: 'bg-green-50 dark:bg-green-900/20', border: 'border-green-500', text: 'text-green-700 dark:text-green-400', badge: 'bg-green-500' };
+    if (score >= 60) return { bg: 'bg-orange-50 dark:bg-orange-900/20', border: 'border-orange-500', text: 'text-orange-700 dark:text-orange-400', badge: 'bg-orange-500' };
+    return { bg: 'bg-red-50 dark:bg-red-900/20', border: 'border-red-500', text: 'text-red-700 dark:text-red-400', badge: 'bg-red-500' };
   };
 
   return (
@@ -72,6 +80,42 @@ export default function NewSubmission() {
         <ArrowLeft className="h-4 w-4 mr-2" />
         Kembali ke Dashboard
       </Link>
+
+      {/* Score Result Display */}
+      {scoreResult && (
+        <div className={`${getScoreColor(scoreResult.score).bg} border-2 ${getScoreColor(scoreResult.score).border} rounded-xl p-8 mb-6 text-center animate-in fade-in duration-500`}>
+          <div className="flex flex-col items-center space-y-4">
+            <div className={`${getScoreColor(scoreResult.score).badge} text-white rounded-full w-32 h-32 flex items-center justify-center shadow-lg`}>
+              <div>
+                <div className="text-5xl font-bold">{scoreResult.score}</div>
+                <div className="text-sm font-medium">/100</div>
+              </div>
+            </div>
+            <div>
+              <h2 className={`text-2xl font-bold ${getScoreColor(scoreResult.score).text} mb-2`}>
+                {scoreResult.recommendation}
+              </h2>
+              <p className="text-gray-600 dark:text-gray-400">
+                Skor Praktik Ekonomi Sirkular Anda
+              </p>
+            </div>
+            <div className="flex space-x-4 pt-4">
+              <button
+                onClick={() => router.push('/umkm/dashboard')}
+                className="px-6 py-3 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition"
+              >
+                Lihat Dashboard
+              </button>
+              <button
+                onClick={() => setScoreResult(null)}
+                className="px-6 py-3 border border-gray-300 dark:border-gray-600 rounded-lg font-semibold hover:bg-gray-50 dark:hover:bg-gray-700 transition text-gray-900 dark:text-white"
+              >
+                Hitung Ulang
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 sm:p-8">
         <h1 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-2">Pengajuan Praktik Sirkular Baru</h1>
