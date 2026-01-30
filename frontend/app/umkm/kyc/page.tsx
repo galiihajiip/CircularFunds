@@ -4,8 +4,10 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuthStore } from '@/lib/store';
 import api from '@/lib/api';
-import { ArrowLeft, Save, Loader, Shield } from 'lucide-react';
+import { ArrowLeft, Save, Loader, Shield, Camera, Upload, Sparkles } from 'lucide-react';
 import Link from 'next/link';
+import KYCCamera from '@/components/KYCCamera';
+import { extractKTPData } from '@/lib/ocr';
 
 export default function UmkmKyc() {
   const router = useRouter();
@@ -13,6 +15,11 @@ export default function UmkmKyc() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
+  const [showCamera, setShowCamera] = useState(false);
+  const [cameraMode, setCameraMode] = useState<'ktp' | 'selfie'>('ktp');
+  const [ktpImage, setKtpImage] = useState<string | null>(null);
+  const [selfieImage, setSelfieImage] = useState<string | null>(null);
+  const [ocrLoading, setOcrLoading] = useState(false);
   const [formData, setFormData] = useState({
     fullName: '',
     idNumber: '',
@@ -27,6 +34,34 @@ export default function UmkmKyc() {
     bankAccountNumber: '',
     bankAccountName: '',
   });
+
+  const openCamera = (mode: 'ktp' | 'selfie') => {
+    setCameraMode(mode);
+    setShowCamera(true);
+  };
+
+  const handleCameraCapture = async (imageData: string) => {
+    if (cameraMode === 'ktp') {
+      setKtpImage(imageData);
+      // Auto-fill form with OCR
+      setOcrLoading(true);
+      try {
+        const ktpData = await extractKTPData(imageData);
+        setFormData(prev => ({
+          ...prev,
+          fullName: ktpData.nama || prev.fullName,
+          idNumber: ktpData.nik || prev.idNumber,
+          address: ktpData.alamat || prev.address,
+        }));
+      } catch (err) {
+        console.error('OCR error:', err);
+      } finally {
+        setOcrLoading(false);
+      }
+    } else {
+      setSelfieImage(imageData);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -95,6 +130,83 @@ export default function UmkmKyc() {
         )}
 
         <form onSubmit={handleSubmit} className="space-y-8">
+          {/* Document Upload Section */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">Dokumen Verifikasi</h3>
+            <div className="grid md:grid-cols-2 gap-4">
+              {/* KTP Photo */}
+              <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-6 text-center">
+                {ktpImage ? (
+                  <div className="space-y-3">
+                    <img src={ktpImage} alt="KTP" className="w-full h-40 object-cover rounded-lg" />
+                    <button
+                      type="button"
+                      onClick={() => openCamera('ktp')}
+                      className="text-sm text-green-600 dark:text-green-400 hover:underline"
+                    >
+                      Foto Ulang
+                    </button>
+                  </div>
+                ) : (
+                  <div className="space-y-3">
+                    <Camera className="h-12 w-12 text-gray-400 mx-auto" />
+                    <div>
+                      <h4 className="font-semibold text-gray-900 dark:text-white">Foto KTP</h4>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">Ambil foto KTP Anda</p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => openCamera('ktp')}
+                      className="inline-flex items-center space-x-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition"
+                    >
+                      <Camera className="h-4 w-4" />
+                      <span>Buka Kamera</span>
+                    </button>
+                  </div>
+                )}
+              </div>
+
+              {/* Selfie with KTP */}
+              <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-6 text-center">
+                {selfieImage ? (
+                  <div className="space-y-3">
+                    <img src={selfieImage} alt="Selfie" className="w-full h-40 object-cover rounded-lg" />
+                    <button
+                      type="button"
+                      onClick={() => openCamera('selfie')}
+                      className="text-sm text-green-600 dark:text-green-400 hover:underline"
+                    >
+                      Foto Ulang
+                    </button>
+                  </div>
+                ) : (
+                  <div className="space-y-3">
+                    <Camera className="h-12 w-12 text-gray-400 mx-auto" />
+                    <div>
+                      <h4 className="font-semibold text-gray-900 dark:text-white">Selfie dengan KTP</h4>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">Foto diri memegang KTP</p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => openCamera('selfie')}
+                      className="inline-flex items-center space-x-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition"
+                    >
+                      <Camera className="h-4 w-4" />
+                      <span>Buka Kamera</span>
+                    </button>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {ocrLoading && (
+              <div className="mt-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-400 px-4 py-3 rounded-lg flex items-center space-x-2">
+                <Sparkles className="h-5 w-5 animate-pulse" />
+                <span>Membaca data KTP dengan OCR...</span>
+              </div>
+            )}
+          </div>
+
           {/* Personal Information */}
           <div>
             <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">Informasi Pribadi</h3>
@@ -294,6 +406,15 @@ export default function UmkmKyc() {
           </div>
         </form>
       </div>
+
+      {/* Camera Modal */}
+      {showCamera && (
+        <KYCCamera
+          mode={cameraMode}
+          onCapture={handleCameraCapture}
+          onClose={() => setShowCamera(false)}
+        />
+      )}
     </div>
   );
 }
