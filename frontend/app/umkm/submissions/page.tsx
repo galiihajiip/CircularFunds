@@ -7,12 +7,15 @@ import Link from 'next/link';
 import { ArrowLeft, Plus, FileText } from 'lucide-react';
 
 export default function Submissions() {
-  const { user } = useAuthStore();
+  const { user, isHydrated } = useAuthStore();
   const router = useRouter();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Allow demo mode users
+    // Wait for hydration to complete
+    if (!isHydrated) return;
+    
+    // Check auth after hydration
     if (!user) {
       router.push('/login');
       return;
@@ -23,9 +26,9 @@ export default function Submissions() {
     }
     // For now, show empty state
     setLoading(false);
-  }, [user, router]);
+  }, [user, router, isHydrated]);
 
-  if (loading) {
+  if (!isHydrated || loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600"></div>

@@ -8,7 +8,7 @@ import { TrendingUp, Award, FileText, AlertCircle, Plus } from 'lucide-react';
 import Link from 'next/link';
 
 export default function UmkmDashboard() {
-  const { user } = useAuthStore();
+  const { user, isHydrated } = useAuthStore();
   const router = useRouter();
   const [profile, setProfile] = useState<{
     circularScore?: number;
@@ -21,7 +21,10 @@ export default function UmkmDashboard() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Allow demo mode users
+    // Wait for hydration to complete
+    if (!isHydrated) return;
+    
+    // Check auth after hydration
     if (!user) {
       router.push('/login');
       return;
@@ -34,7 +37,7 @@ export default function UmkmDashboard() {
     // Try to fetch profile, but don't fail if backend is down (demo mode)
     fetchProfile();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user, router]);
+  }, [user, router, isHydrated]);
 
   const fetchProfile = async () => {
     try {
@@ -56,7 +59,7 @@ export default function UmkmDashboard() {
     }
   };
 
-  if (loading) {
+  if (!isHydrated || loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600"></div>
