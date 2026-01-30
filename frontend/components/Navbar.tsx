@@ -5,13 +5,26 @@ import Link from 'next/link';
 import { useAuthStore } from '@/lib/store';
 import { useThemeStore } from '@/lib/theme';
 import { useRouter } from 'next/navigation';
-import { Leaf, LogOut, User, Moon, Sun, Menu, X } from 'lucide-react';
+import { Leaf, LogOut, User, Moon, Sun, Menu, X, Zap } from 'lucide-react';
 
 export default function Navbar() {
-  const { user, logout } = useAuthStore();
+  const { user, logout, setAuth } = useAuthStore();
   const { isDark, toggleTheme } = useThemeStore();
   const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const enterDemoMode = () => {
+    const demoUser = {
+      id: 'demo-user-' + Date.now(),
+      email: 'demo@circularfund.com',
+      role: 'UMKM' as const,
+    };
+    const demoToken = 'demo-token-' + Date.now();
+    
+    setAuth(demoUser, demoToken, demoToken);
+    setMobileMenuOpen(false);
+    router.push('/umkm/dashboard');
+  };
 
   const handleLogout = () => {
     logout();
@@ -78,6 +91,13 @@ export default function Navbar() {
               </>
             ) : (
               <>
+                <button
+                  onClick={enterDemoMode}
+                  className="flex items-center space-x-1 bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700 px-4 py-2 rounded-md text-sm font-medium transition"
+                >
+                  <Zap className="h-4 w-4" />
+                  <span>Demo</span>
+                </button>
                 <Link
                   href="/login"
                   className="text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 px-3 py-2 rounded-md text-sm font-medium"
@@ -162,6 +182,13 @@ export default function Navbar() {
               </>
             ) : (
               <>
+                <button
+                  onClick={enterDemoMode}
+                  className="w-full text-left px-3 py-2 rounded-md text-base font-medium bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700 flex items-center space-x-2"
+                >
+                  <Zap className="h-4 w-4" />
+                  <span>Demo Mode</span>
+                </button>
                 <Link
                   href="/login"
                   onClick={() => setMobileMenuOpen(false)}

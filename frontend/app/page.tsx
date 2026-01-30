@@ -1,9 +1,27 @@
 'use client';
 
 import Link from 'next/link';
-import { Leaf, TrendingUp, Shield, Users, ArrowRight, Recycle, Award, BarChart3, Sparkles } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { Leaf, TrendingUp, Shield, Users, ArrowRight, Recycle, Award, BarChart3, Sparkles, Zap } from 'lucide-react';
+import { useAuthStore } from '@/lib/store';
 
 export default function Home() {
+  const router = useRouter();
+  const setAuth = useAuthStore((state) => state.setAuth);
+
+  const enterDemoMode = () => {
+    // Set dummy user for demo
+    const demoUser = {
+      id: 'demo-user-' + Date.now(),
+      email: 'demo@circularfund.com',
+      role: 'UMKM' as const,
+    };
+    const demoToken = 'demo-token-' + Date.now();
+    
+    setAuth(demoUser, demoToken, demoToken);
+    router.push('/umkm/dashboard');
+  };
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -30,6 +48,13 @@ export default function Home() {
                 dan dapatkan keuntungan sambil memberikan dampak positif bagi lingkungan.
               </p>
               <div className="flex flex-col sm:flex-row justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-4">
+                <button
+                  onClick={enterDemoMode}
+                  className="inline-flex items-center justify-center space-x-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-xl font-semibold hover:from-purple-700 hover:to-pink-700 transition shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 animate-pulse"
+                >
+                  <Zap className="h-5 w-5" />
+                  <span>Demo Mode</span>
+                </button>
                 <Link
                   href="/register"
                   className="inline-flex items-center justify-center space-x-2 bg-green-600 text-white px-8 py-4 rounded-xl font-semibold hover:bg-green-700 transition shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
