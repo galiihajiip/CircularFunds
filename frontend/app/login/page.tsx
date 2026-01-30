@@ -36,6 +36,20 @@ export default function Login() {
       const error = err as { response?: { data?: { message?: string } }; message?: string };
       const errorMessage = error.response?.data?.message || error.message || 'Login gagal';
       console.error('Error message:', errorMessage);
+      
+      // Demo mode: Auto login untuk testing
+      if (errorMessage.includes('Network Error') || errorMessage.includes('ECONNREFUSED')) {
+        alert('Mode Demo: Backend tidak tersedia. Login otomatis sebagai demo user.');
+        const demoUser = {
+          id: 'demo-user-id',
+          email: formData.email,
+          role: 'UMKM' as 'UMKM' | 'KREDITOR'
+        };
+        setAuth(demoUser, 'demo-token', 'demo-refresh');
+        router.push('/umkm/dashboard');
+        return;
+      }
+      
       setError(errorMessage);
     } finally {
       setLoading(false);
